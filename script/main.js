@@ -11,7 +11,7 @@
         {
 	    name:'ample',
 	    dark:true,
-	    light:true
+	    light:false
 	},
 	{
 	    name: 'zenburn',
