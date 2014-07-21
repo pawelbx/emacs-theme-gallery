@@ -1,0 +1,16 @@
+body { background-color: #383838; color: #CCCCCC}
+
+#filterControls { padding: 0.5em; width:100%; text-align: center; }
+
+#gallery { margin:0px auto;
+	   border-spacing: 3em;
+	   border-collapse: separate;
+	 }
+/* td { box-shadow: 0 0 0.8em }	 */
+
+div { width: 316px; };
+
+span {display:block;}
+
+a:link { color:#0099FF; }
+a:visited { color:#BB88EE; }
