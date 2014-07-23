@@ -1,5 +1,5 @@
 (function ($, undefined) {
-    "use strict";
+    'use strict';
     var themeProperties = emacsThemesGallery.themeProperties;
     
     themeProperties.rootFolder		= '../screenshots/';
@@ -36,7 +36,7 @@
 	$.each(themeProperties.themes, function(i, theme) {
 	    var themeElement = {};
 	    var themeLocation;
-
+	    
 	    var language = $.grep(themeProperties.languages, function(language) {
 	    	return (language.name === filter.language);
 	    })[0];
@@ -62,10 +62,11 @@
 
 	$.each(themeElements, function(i, themeElement) {
 	    var $td = $('<td>');
-	    $td.append(getThemeNameMarkup(themeElement));
 	    $td.append(themeElement.$img);
+	    
+	    
 	    $galleryBody.find('tr:last').append($td);
-	    $td.append(getThemeLinkMarkup(themeElement));
+	    $td.append(getThemeNameMarkup(themeElement).append(getThemeLinkMarkup(themeElement)));
 	    if ((i + 1) % 3 === 0) {
 		$galleryBody.append('<tr> </tr>');
 	    }
@@ -73,12 +74,12 @@
     }
 
     function getThemeNameMarkup(themeProps) {
-	var $span = $('<span>' + themeProps.name + '</span>');
-	return $span;
+	var $staged = $('<section>' + themeProps.name + ' </section>');
+	return $staged;
     }
+    
     function getThemeLinkMarkup(themeProps) {
 	if (themeProps.location != 'native') {
-	    console.log(themeProps.location);
 	    var $a = $('<a>', {href: themeProps.location, text:'GitHub'});
 	}
 

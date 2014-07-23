@@ -33,13 +33,13 @@
 			", location: '" (nth 2 theme) "' },\n")))
       (delete-char -2)
       (insert "\n];")
-      (write-region nil nil "~/text/javascript/projects/emacsThemes/scripts/themeProperties.js"))))
+      (write-region nil nil "../scripts/themeProperties.js"))))
 
 (defun takeThemeScreenshots (themeName color)
   "Creates screenshots for current theme"
-  (let* ((screenShotDir (concat "~/text/javascript/projects/emacsThemes/screenshots/" color))
+  (let* ((screenShotDir (concat "../screenshots/" color))
 	 (screenShotThemeDir (concat screenShotDir "/" themeName "/"))
-	 (sourceFilesAbsolute (directory-files "~/text/javascript/projects/emacsThemes/languageTemplates" t))
+	 (sourceFilesAbsolute (directory-files "../languageTemplates" t))
 	 (scrotCommand (concat "scrot -q 100 -u " screenShotThemeDir)))
 
     (unless (file-exists-p screenShotDir)
