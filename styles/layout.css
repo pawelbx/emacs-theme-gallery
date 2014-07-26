@@ -1,11 +1,23 @@
-body { background-color: #383838; color: #CCCCCC}
+body {
+    background-color: #383838;
+    color: #CCCCCC
+}
 
-#filterControls { padding: 0.5em; width:100%; text-align: center; }
+#filterControls {
+    padding: 0.5em;
+    width:100%;
+    text-align: center;
+}
 
-#gallery { margin:0px auto;
-	   border-spacing: 3em;
-	   border-collapse: separate;
-	 }
+#gallery {
+    margin:0px auto;
+    border-spacing: 5em;
+    border-collapse: separate;
+}
+
+.themeName { margin-bottom: 3px; }
+
+.themeHomeLink { margin-top: 3px;  }
 
 a:link { color:#0099FF; }
 a:visited { color:#BB88EE; }

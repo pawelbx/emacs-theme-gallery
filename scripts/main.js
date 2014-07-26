@@ -62,11 +62,11 @@
 
 	$.each(themeElements, function(i, themeElement) {
 	    var $td = $('<td>');
-	    $td.append(themeElement.$img);
-	    
 	    
 	    $galleryBody.find('tr:last').append($td);
-	    $td.append(getThemeNameMarkup(themeElement).append(getThemeLinkMarkup(themeElement)));
+	    $td.append(getThemeNameMarkup(themeElement));
+	    $td.append(themeElement.$img);
+	    $td.append(getThemeLinkMarkup(themeElement));
 	    if ((i + 1) % 3 === 0) {
 		$galleryBody.append('<tr> </tr>');
 	    }
@@ -74,16 +74,18 @@
     }
 
     function getThemeNameMarkup(themeProps) {
-	var $staged = $('<section>' + themeProps.name + ' </section>');
-	return $staged;
+	var $div = $('<div class="themeName">' + themeProps.name + ' </div>');
+	return $div;
     }
     
     function getThemeLinkMarkup(themeProps) {
 	if (themeProps.location != 'native') {
+	    var $div = $('<div class="themeHomeLink">');
 	    var $a = $('<a>', {href: themeProps.location, text:'GitHub'});
+	    $div.append($a);
 	}
 
-	return $a;
+	return $div;
     }
     
     function events() {

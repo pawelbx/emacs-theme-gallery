@@ -1,20 +1,33 @@
 var emacsThemesGallery = {};
 emacsThemesGallery.themeProperties = {};
 emacsThemesGallery.themeProperties.themes = [
-    { name: 'ample-light', dark: false, location: 'https://github.com/jordonbiondo/ample-theme' },
-    { name: 'ample', dark: true, location: 'https://github.com/jordonbiondo/ample-theme' },
-    { name: 'monokai', dark: true, location: 'https://github.com/oneKelvinSmith/monokai-emacs' },
     { name: 'adwaita', dark: false, location: 'native' },
+    { name: 'afternoon', dark: true, location: 'https://github.com/osener/emacs-afternoon-theme' },
+    { name: 'ample', dark: true, location: 'https://github.com/jordonbiondo/ample-theme' },
+    { name: 'ample-light', dark: false, location: 'https://github.com/jordonbiondo/ample-theme' },
+    { name: 'ample-zen', dark: true, location: 'https://github.com/mjwall/ample-zen' },
+    { name: 'anti-zenburn', dark: false, location: 'https://github.com/m00natic/anti-zenburn-theme' },
+    { name: 'badger', dark: true, location: 'https://github.com/ccann/badger-theme' },
+    { name: 'bubbleberry', dark: true, location: 'https://github.com/jasonm23/emacs-bubbleberry-theme' },
+    { name: 'busybee', dark: true, location: 'https://github.com/mswift42/busybee-theme' },
+    { name: 'cyberpunk', dark: true, location: 'https://github.com/n3mo/cyberpunk-theme.el' },
     { name: 'deeper-blue', dark: true, location: 'native' },
     { name: 'dichromacy', dark: false, location: 'native' },
+    { name: 'distinguished', dark: true, location: 'https://github.com/Lokaltog/distinguished-theme' },
+    { name: 'espresso', dark: false, location: 'https://github.com/dgutov/espresso-theme' },
+    { name: 'flatland', dark: true, location: 'https://github.com/gchp/flatland-emacs' },
     { name: 'light-blue', dark: false, location: 'native' },
     { name: 'manoj-dark', dark: true, location: 'native' },
     { name: 'misterioso', dark: true, location: 'native' },
-    { name: 'tango-dark', dark: true, location: 'native' },
+    { name: 'monokai', dark: true, location: 'https://github.com/oneKelvinSmith/monokai-emacs' },
+    { name: 'solarized-dark', dark: true, location: 'https://github.com/bbatsov/solarized-emacs' },
+    { name: 'solarized-light', dark: false, location: 'https://github.com/bbatsov/solarized-emacs' },
     { name: 'tango', dark: false, location: 'native' },
+    { name: 'tango-dark', dark: true, location: 'native' },
     { name: 'tsdh-dark', dark: true, location: 'native' },
     { name: 'tsdh-light', dark: false, location: 'native' },
     { name: 'wheatgrass', dark: true, location: 'native' },
     { name: 'whiteboard', dark: false, location: 'native' },
-    { name: 'wombat', dark: true, location: 'native' }
+    { name: 'wombat', dark: true, location: 'native' },
+    { name: 'zenburn', dark: true, location: 'https://github.com/bbatsov/zenburn-emacs' }
 ];
