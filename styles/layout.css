@@ -1,23 +1,65 @@
 body {
-    background-color: #383838;
-    color: #CCCCCC
+    background-color: rgba(41, 41, 41, 1);
+    color: #CCCCCC;
+    font-family: sans-serif;
+    font-size: 14px;
 }
 
 #filterControls {
-    padding: 0.5em;
+    padding: 0.5rem;
     width:100%;
     text-align: center;
+    position: fixed;
+    background-color: rgba(32, 32, 32, 1);
 }
 
 #gallery {
     margin:0px auto;
-    border-spacing: 5em;
-    border-collapse: separate;
+    padding-top: 5rem;
+    text-align: center;
 }
 
-.themeName { margin-bottom: 3px; }
+@media (max-width: 365px) {
+    #gallery li {
+	display: inline-block;
+	margin-bottom: 1.5rem;
+	vertical-align: top;
+    }
+}
 
-.themeHomeLink { margin-top: 3px;  }
+@media (min-width: 366px) and (max-width: 840px) {
+    #gallery li {
+	display: inline-block;
+	margin: 1.5rem;
+	vertical-align: top;
+    }
+}
+@media (min-width: 841px) {
+    #gallery li {
+	display: inline-block;
+	margin: 3rem;
+	vertical-align: top;
+    }
+}
+
+#themeColor {
+    display:inline;
+}
+
+.ui-selectmenu-button {
+    vertical-align:middle;
+}
+.ui-widget {
+    font-size: 12px;
+}
+
+.themeName { margin-bottom: 3px; text-align: left; }
+
+.themeHomeLink { margin-top: 3px;  text-align: left; }
+
+img {
+    box-shadow: 0px 0px 0.1em;
+}
 
 a:link { color:#0099FF; }
 a:visited { color:#BB88EE; }

@@ -1,8 +1,10 @@
+var emacsThemesGallery = emacsThemesGallery || {};
 (function ($, undefined) {
     'use strict';
+
     var themeProperties = emacsThemesGallery.themeProperties;
     
-    themeProperties.rootFolder		= '../screenshots/';
+    themeProperties.rootFolder		= 'screenshots/';
     themeProperties.darkFolder		= themeProperties.rootFolder + 'dark/';
     themeProperties.lightFolder		= themeProperties.rootFolder + 'light/';
     themeProperties.imgExtension	=  '.png';
@@ -23,92 +25,140 @@
 	{ name: 'Elisp',
 	  extension: 'el'
 	},
+	{ name: 'Org',
+	  extension: 'org'
+	},
 	{ name: 'Dired',
 	  extension: ''
 	}
     ];
 
-    var filter = {};
+    var FilterView = function() {
+	
+	var $themeColor;
+	var $languagesAndModes;
+	var shade;
+	var language;
+	
+	initialize();
 
-    function reloadTheme(filter) {
-	var $galleryBody = $('#gallery tbody').html('<tr></tr>');
-	var themeElements = [];
-	$.each(themeProperties.themes, function(i, theme) {
-	    var themeElement = {};
-	    var themeLocation;
-	    
-	    var language = $.grep(themeProperties.languages, function(language) {
-	    	return (language.name === filter.language);
-	    })[0];
+	function initialize() {
+	    $themeColor = $('#themeColor ');
+	    $languagesAndModes = $('#languagesAndModes');
+	    shade = $themeColor.find('input[type="radio"]:checked').val();
+	    language = $languagesAndModes.find(':checked').val();
 
-	    if (filter.dark && theme.dark) {
-	    	themeLocation = themeProperties.darkFolder + theme.name + '/' +
-	    	    language.extension + themeProperties.imgExtension;
-	    	themeElement.$img = $('<img>', {src: themeLocation});
-		themeElement.name = theme.name;
-		themeElement.location = theme.location;
-		themeElements.push(themeElement);
-	    }
-	    else if (filter.light && !theme.dark) {
-	    	themeLocation = themeProperties.lightFolder + theme.name + '/' +
-	    	    language.extension + themeProperties.imgExtension;
-	    	themeElement.$img = $('<img>', {src: themeLocation});
-		themeElement.name = theme.name;
-		themeElement.location = theme.location;
-		themeElements.push(themeElement);
-	    }
+	    $themeColor.buttonset();
+	    $languagesAndModes.selectmenu({
+		select: onLanguageChange
+	    });
 
-	});
-
-	$.each(themeElements, function(i, themeElement) {
-	    var $td = $('<td>');
-	    
-	    $galleryBody.find('tr:last').append($td);
-	    $td.append(getThemeNameMarkup(themeElement));
-	    $td.append(themeElement.$img);
-	    $td.append(getThemeLinkMarkup(themeElement));
-	    if ((i + 1) % 3 === 0) {
-		$galleryBody.append('<tr> </tr>');
-	    }
-	});
-    }
-
-    function getThemeNameMarkup(themeProps) {
-	var $div = $('<div class="themeName">' + themeProps.name + ' </div>');
-	return $div;
-    }
-    
-    function getThemeLinkMarkup(themeProps) {
-	if (themeProps.location != 'native') {
-	    var $div = $('<div class="themeHomeLink">');
-	    var $a = $('<a>', {href: themeProps.location, text:'GitHub'});
-	    $div.append($a);
+	    $themeColor.find('input[type="radio"]').off().on('change', onShadeChange);;
 	}
 
-	return $div;
-    }
-    
-    function events() {
-	$('#color').off().on('change', function() {
-	    filter.dark = ($(this).val() === 'Dark');
-	    filter.light = !filter.light;
-	    reloadTheme(filter);
-	});
-	$('#languagesAndModes').off().on('change', function() {
-	    filter.language = $(this).val();
-	    reloadTheme(filter);
-	});
-    }
+	this.getSelectedFilter = function() {
+	    return { shade: shade, language: language };
+	};
 
-    function init() {
-	filter.dark = ($('#color').val() === 'Dark');
-	filter.light = !filter.dark;
-	filter.language = $('#languagesAndModes').val();
-	reloadTheme(filter);
-	events();
-    }
+	function onShadeChange() {
+	    shade = ($(this).val() === 'Dark') ? 'dark' : 'light';   
+	    $(document).trigger('filterChange', [language, shade]);
+	}
+
+	function onLanguageChange(event, ui) {
+	    language = ui.item.value;
+	    $(document).trigger('filterChange', [language, shade]);
+	}
+    };
+
+    var GalleryView = function(initialFilter) {
+	var $gallery;
+
+	initialize();
+
+	function initialize() {
+	    $gallery = $('#gallery');
+	    loadAllThemes();
+	    bindEvents();
+	}
+
+	function loadAllThemes() {
+	    $.each(themeProperties.themes, function(i, theme) {
+		$.each(themeProperties.languages, function(j, language) {
+
+		    var shade = theme.dark ? 'dark' : 'light';
+		    var themeView = new ThemeView(theme, language, shade);
+		    if (((initialFilter.shade === 'Dark') != theme.dark) || (initialFilter.language != language.name)) {
+			themeView.getMarkup().hide();
+		    }
+		    $gallery.append(themeView.getMarkup());
+		});
+	    });
+	}
+
+	function refreshThemes(language, shade) {
+	    $gallery.find('li').hide();
+	    $gallery.find('li.' + shade + '.' + language).show();
+	}
+
+	function bindEvents() {
+	    $(document).off('filterChange').on('filterChange', function(event, language, shade) {
+		refreshThemes(language, shade);
+	    });
+	}
+    };
+    
+    var ThemeView = function(theme, language, shade) {
+	var themeLocation;
+	var themeElement;
+	initialize();
+
+	function initialize() {
+	    themeLocation = getThemeLocation();
+	    themeElement = createThemeElement();
+	}
+
+	this.getMarkup = function() {
+	    return themeElement;
+	};
+
+	function getThemeLocation() {
+	    var themeLocation = (theme.dark ? themeProperties.darkFolder : 
+				 themeProperties.lightFolder ) + theme.name + '/' +
+	    	    language.extension + themeProperties.imgExtension;
+	    
+	    return themeLocation;
+	}
+
+	function createThemeElement() {
+	    var $img = $('<img>', {src: themeLocation});
+	    var $themeContainer = $('<li>', {class: shade + ' ' + language.name});
+
+	    $themeContainer.append(getThemeNameMarkup());
+	    $themeContainer.append($img);
+	    $themeContainer.append(getThemeLinkMarkup());
+
+	    return $themeContainer;
+	}
+
+	function getThemeNameMarkup() {
+	    var $div = $('<div class="themeName">' + theme.name + ' </div>');
+	    return $div;
+	}
+
+	function getThemeLinkMarkup() {
+	    var $div;
+	    $div = $('<div class="themeHomeLink">');
+	    if (theme.location != 'native') {
+		var $a = $('<a>', {href: theme.location, text:'GitHub'});
+		$div.append($a);
+	    }
+	    return $div;
+	}
+    };
 
     $(document).ready(function() {
-	init();
+	var filterView = new FilterView();
+	var galleryView = new GalleryView(filterView.getSelectedFilter());
     });
 })(jQuery);
