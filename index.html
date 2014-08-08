@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/reset.css" type="text/css"/>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/dot-luv/jquery-ui.css" type="text/css"/>
+    <link rel="stylesheet" href="styles/layout.css" type="text/css"/>
+  </head>
+  <body>
+    <header id="filterControls">
+      <div id="themeColor">
+	<input type="radio" id="darkColor" name="color" value="Dark" checked /> <label for="darkColor"> Dark </label>
+	<input type="radio" id="lightColor" name="color" value="Light" /> <label for="lightColor"> Light </label>
+      </div>
+      <select id="languagesAndModes">
+	<optgroup label="Languages">
+	  <option value="Elisp">Elisp</option>
+	  <option value="JavaScript">JavaScript</option>
+	  <option value="C">C</option>
+	  <option value="Java">Java</option>
+	  <option value="HTML">HTML</option>
+	</optgroup>
+	<optgroup label="Modes">
+	  <option value="Org">Org</option>
+	  <option value="Dired">Dired+</option>
+	</optgroup>
+      </select>
+    </header>
+    <main>
+      <ol id="gallery">
+      </ol>
+    </main>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="scripts/themeProperties.js"></script>
+    <script type="text/javascript" src="scripts/main.js"></script>
+  </body>
+</html>
