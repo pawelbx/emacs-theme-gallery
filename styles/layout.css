@@ -2,7 +2,7 @@ body {
     background-color: rgba(41, 41, 41, 1);
     color: #CCCCCC;
     font-family: sans-serif;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 #filterControls {
@@ -50,7 +50,7 @@ body {
     vertical-align:middle;
 }
 .ui-widget {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .themeName { margin-bottom: 3px; text-align: left; }
