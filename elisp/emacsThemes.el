@@ -41,6 +41,11 @@
 		  (moe-dark t "https://github.com/kuanyui/moe-theme.el" "moe-theme")
 		  (moe-light nil "https://github.com/kuanyui/moe-theme.el" "moe-theme")
 		  (monokai t "https://github.com/oneKelvinSmith/monokai-emacs" "monokai-theme")
+		  (sanityinc-tomorrow-blue t "https://github.com/purcell/color-theme-sanityinc-tomorrow" "color-theme-sanityinc-tomorrow")
+		  (sanityinc-tomorrow-bright t "https://github.com/purcell/color-theme-sanityinc-tomorrow" "color-theme-sanityinc-tomorrow")
+		  (sanityinc-tomorrow-day nil "https://github.com/purcell/color-theme-sanityinc-tomorrow"  "color-theme-sanityinc-tomorrow")
+		  (sanityinc-tomorrow-eighties t "https://github.com/purcell/color-theme-sanityinc-tomorrow" "color-theme-sanityinc-tomorrow")
+		  (sanityinc-tomorrow-night t "https://github.com/purcell/color-theme-sanityinc-tomorrow" "color-theme-sanityinc-tomorrow")
 		  (solarized-dark t "https://github.com/bbatsov/solarized-emacs" "solarized-theme")
 		  (solarized-light nil "https://github.com/bbatsov/solarized-emacs" "solarized-theme")
 		  (tango nil "native")
@@ -78,8 +83,8 @@
     (unless (file-exists-p screenShotThemeDir)
       (make-directory screenShotThemeDir))
     (dolist (sourceFileAbsolute sourceFilesAbsolute)
-      (let* ((sourceFileExtension (unless (file-name-extension sourceFileAbsolute) 
-				    "dired" 
+      (let* ((sourceFileExtension (if (not (file-name-extension sourceFileAbsolute))
+				      "dired" 
 				    (file-name-extension sourceFileAbsolute)))
 	     (screenShotName (concat sourceFileExtension ".png"))
 	     (takeScreenshot (concat scrotCommand screenShotName))
