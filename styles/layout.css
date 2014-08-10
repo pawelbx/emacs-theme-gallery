@@ -57,6 +57,7 @@ body {
 
 .themeHomeLink { margin-top: 3px;  text-align: left; }
 
+.downloads { float: right; }
 img {
     box-shadow: 0px 0px 0.1em;
 }

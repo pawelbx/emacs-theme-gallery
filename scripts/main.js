@@ -3,12 +3,12 @@ var emacsThemesGallery = emacsThemesGallery || {};
     'use strict';
 
     var themeProperties = emacsThemesGallery.themeProperties;
-    
+
     themeProperties.rootFolder		= 'screenshots/';
     themeProperties.darkFolder		= themeProperties.rootFolder + 'dark/';
     themeProperties.lightFolder		= themeProperties.rootFolder + 'light/';
     themeProperties.imgExtension	=  '.png';
-    
+
     themeProperties.languages = [
 	{ name: 'C',
 	  extension: 'c'
@@ -29,50 +29,64 @@ var emacsThemesGallery = emacsThemesGallery || {};
 	  extension: 'org'
 	},
 	{ name: 'Dired',
-	  extension: ''
+	  extension: 'dired'
 	}
     ];
 
     var FilterView = function() {
-	
 	var $themeColor;
 	var $languagesAndModes;
+	var $sortBy;
 	var shade;
 	var language;
-	
+	var sortBy;
+
 	initialize();
 
 	function initialize() {
 	    $themeColor = $('#themeColor ');
 	    $languagesAndModes = $('#languagesAndModes');
-	    shade = $themeColor.find('input[type="radio"]:checked').val();
+	    $sortBy = $('#sortBy');
+	    shade = $themeColor.find('input[type="radio"]:checked').val() === 'Dark' ? 'dark' : 'light';
 	    language = $languagesAndModes.find(':checked').val();
+	    sortBy = $sortBy.find(':checked').val();
 
 	    $themeColor.buttonset();
 	    $languagesAndModes.selectmenu({
+		width:120,
 		select: onLanguageChange
+	    });
+	    $sortBy.selectmenu({
+		width:116,
+		select: onSortByChange
 	    });
 
 	    $themeColor.find('input[type="radio"]').off().on('change', onShadeChange);;
 	}
 
 	this.getSelectedFilter = function() {
-	    return { shade: shade, language: language };
+	    return { shade: shade, language: language, sortBy: sortBy };
 	};
 
 	function onShadeChange() {
-	    shade = ($(this).val() === 'Dark') ? 'dark' : 'light';   
-	    $(document).trigger('filterChange', [language, shade]);
+	    shade = ($(this).val() === 'Dark') ? 'dark' : 'light';
+	    $(document).trigger('filterChange', [language, shade, sortBy]);
 	}
 
 	function onLanguageChange(event, ui) {
 	    language = ui.item.value;
-	    $(document).trigger('filterChange', [language, shade]);
+	    $(document).trigger('filterChange', [language, shade, sortBy]);
+	}
+
+	function onSortByChange(event, ui) {
+	    sortBy = ui.item.value;
+	    $(document).trigger('filterChange', [language, shade, sortBy]);
 	}
     };
 
     var GalleryView = function(initialFilter) {
 	var $gallery;
+	var $themeCollection;
 
 	initialize();
 
@@ -85,29 +99,66 @@ var emacsThemesGallery = emacsThemesGallery || {};
 	function loadAllThemes() {
 	    $.each(themeProperties.themes, function(i, theme) {
 		$.each(themeProperties.languages, function(j, language) {
-
 		    var shade = theme.dark ? 'dark' : 'light';
 		    var themeView = new ThemeView(theme, language, shade);
-		    if (((initialFilter.shade === 'Dark') != theme.dark) || (initialFilter.language != language.name)) {
+		    if (((initialFilter.shade === 'dark') != theme.dark) || (initialFilter.language != language.name)) {
 			themeView.getMarkup().hide();
 		    }
 		    $gallery.append(themeView.getMarkup());
 		});
 	    });
+	    $themeCollection = $gallery.find('li');
+	    sortThemes();
 	}
 
-	function refreshThemes(language, shade) {
-	    $gallery.find('li').hide();
-	    $gallery.find('li.' + shade + '.' + language).show();
+	function sortThemes(sortBy) {
+	    $themeCollection.sort(function(a, b) {
+		if (sortBy === 'A-Z' || sortBy === 'Z-A') {
+		    var aName = $(a).data('name');
+		    var bName = $(b).data('name');
+		    var order = (sortBy === 'A-Z') ? -1 : 1;
+
+		    if (aName < bName) {
+			return 1 * order;
+		    }
+		    else if (aName > bName) {
+			return -1 * order;
+		    }
+		    else {
+			return 0;
+		    }
+		}
+		else {
+		    var aMelpaHits = $(a).data('melpaHits');
+		    var bMelpaHits = $(b).data('melpaHits');
+
+		    if (aMelpaHits > bMelpaHits) {
+			return -1;
+		    }
+		    else if (aMelpaHits < bMelpaHits) {
+			return 1;
+		    }
+		    else {
+			return 0;
+		    }
+		}
+	    });
+	    $themeCollection.detach().appendTo($gallery);
+	}
+
+	function refreshThemes(language, shade, sortBy) {
+	    $themeCollection.hide();
+	    $themeCollection.filter('.' + shade + '.' + language).show();
+	    sortThemes(sortBy);
 	}
 
 	function bindEvents() {
-	    $(document).off('filterChange').on('filterChange', function(event, language, shade) {
-		refreshThemes(language, shade);
+	    $(document).off('filterChange').on('filterChange', function(event, language, shade, sortBy) {
+		refreshThemes(language, shade, sortBy);
 	    });
 	}
     };
-    
+
     var ThemeView = function(theme, language, shade) {
 	var themeLocation;
 	var themeElement;
@@ -123,16 +174,19 @@ var emacsThemesGallery = emacsThemesGallery || {};
 	};
 
 	function getThemeLocation() {
-	    var themeLocation = (theme.dark ? themeProperties.darkFolder : 
+	    var themeLocation = (theme.dark ? themeProperties.darkFolder :
 				 themeProperties.lightFolder ) + theme.name + '/' +
 	    	    language.extension + themeProperties.imgExtension;
-	    
+
 	    return themeLocation;
 	}
 
 	function createThemeElement() {
 	    var $img = $('<img>', {src: themeLocation});
-	    var $themeContainer = $('<li>', {class: shade + ' ' + language.name});
+	    var $themeContainer = $('<li>', {class: shade + ' ' + language.name})
+		    .data('name', theme.name)
+		    .data('melpaHits', theme.melpaHits);
+
 
 	    $themeContainer.append(getThemeNameMarkup());
 	    $themeContainer.append($img);
@@ -148,16 +202,48 @@ var emacsThemesGallery = emacsThemesGallery || {};
 
 	function getThemeLinkMarkup() {
 	    var $div;
+	    var $span;
 	    $div = $('<div class="themeHomeLink">');
 	    if (theme.location != 'native') {
 		var $a = $('<a>', {href: theme.location, text:'GitHub'});
 		$div.append($a);
+		$span = $('<span class="downloads"> Downloads: ' + theme.melpHitsLocaleString + '</span>');
+		$div.append($span);
 	    }
 	    return $div;
 	}
     };
 
+    var documentReadyDeferred = $.Deferred();
+
     $(document).ready(function() {
+	documentReadyDeferred.resolve();
+    });
+
+
+    var melpaStatsDeferred = $.getJSON("http://query.yahooapis.com/v1/public/yql",
+				       {
+					   q:      "select * from json where url=\"http://melpa.milkbox.net/download_counts.json?fmt=JSON\"",
+					   format: "json"
+				       });
+
+    melpaStatsDeferred.done(function(jsonQuery) {
+	var themeHits = jsonQuery.query.results.json;
+	$.each(themeProperties.themes, function(i, theme) {
+	    if (theme.melpaName === '') {
+		theme.melpaHits = 1;
+	    }
+	    else {
+		theme.melpaHits = parseInt(themeHits[theme.melpaName], 10);
+		theme.melpHitsLocaleString = theme.melpaHits.toLocaleString();
+	    }
+	});
+    });
+    melpaStatsDeferred.fail(function() {
+	console.log('can\'t reach melpa');
+    });
+
+    $.when(documentReadyDeferred, melpaStatsDeferred).done(function() {
 	var filterView = new FilterView();
 	var galleryView = new GalleryView(filterView.getSelectedFilter());
     });
