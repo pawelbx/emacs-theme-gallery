@@ -6,7 +6,7 @@ var emacsThemesGallery = emacsThemesGallery || {};
 
     (function initialize() {
 	initializeThemeProperties();
-	initializeMelpa();
+	initializeGallery();
     })();
 
     function initializeThemeProperties() {
@@ -40,7 +40,7 @@ var emacsThemesGallery = emacsThemesGallery || {};
 	];
     }
 
-    function initializeMelpa() {
+    function initializeGallery() {
 
 	var documentReadyDeferred = $.Deferred();
 
@@ -50,7 +50,7 @@ var emacsThemesGallery = emacsThemesGallery || {};
 
 	var melpaStatsDeferred = $.getJSON("http://query.yahooapis.com/v1/public/yql",
 					   {
-					       q	 : "select * from json where url=\"http://melpa.milkbox.net/download_counts.json?fmt=JSON\"",
+					       q     : "select * from json where url=\"http://melpa.milkbox.net/download_counts.json?fmt=JSON\"",
 					       format: "json"
 					   });
 
@@ -67,10 +67,13 @@ var emacsThemesGallery = emacsThemesGallery || {};
 	    });
 	});
 	melpaStatsDeferred.fail(function() {
-	    console.log('can\'t reach melpa');
+	    $.each(themeProperties.themes, function(i, theme) {
+		theme.melpaHits = 1;
+		theme.melpHitsLocaleString = '~';
+	    });
 	});
 
-	$.when(documentReadyDeferred, melpaStatsDeferred).done(function() {
+	$.when(documentReadyDeferred, melpaStatsDeferred).always(function() {
 	    var filterView = new FilterView();
 	    var galleryView = new GalleryView(filterView.getSelectedFilter());
 	});
@@ -151,7 +154,7 @@ var emacsThemesGallery = emacsThemesGallery || {};
 		});
 	    });
 	    $themeCollection = $gallery.find('li');
-	    sortThemes();
+	    sortThemes(initialFilter.sortBy);
 	}
 
 	function sortThemes(sortBy) {
@@ -225,7 +228,7 @@ var emacsThemesGallery = emacsThemesGallery || {};
 	}
 
 	function createThemeElement() {
-	    var $img = $('<img>', {src: themeLocation});
+	    var $img = $('<img>', {src: themeLocation, width: 316, height: 221});
 	    var $themeContainer = $('<li>', {class: shade + ' ' + language.name})
 		    .data('name', theme.name)
 		    .data('melpaHits', theme.melpaHits);
