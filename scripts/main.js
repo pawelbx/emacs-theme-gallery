@@ -74,6 +74,7 @@ var emacsThemesGallery = emacsThemesGallery || {};
 	});
 
 	$.when(documentReadyDeferred, melpaStatsDeferred).always(function() {
+	    $('#loading').hide();
 	    var filterView = new FilterView();
 	    var galleryView = new GalleryView(filterView.getSelectedFilter());
 	});
@@ -103,7 +104,7 @@ var emacsThemesGallery = emacsThemesGallery || {};
 		select: onLanguageChange
 	    });
 	    $sortBy.selectmenu({
-		width:116,
+		width:100,
 		select: onSortByChange
 	    });
 
@@ -116,17 +117,17 @@ var emacsThemesGallery = emacsThemesGallery || {};
 
 	function onShadeChange() {
 	    shade = ($(this).val() === 'Dark') ? 'dark' : 'light';
-	    $(document).trigger('filterChange', [language, shade, sortBy]);
+	    $(document).trigger('onShadeChange', [language, shade, sortBy]);
 	}
 
 	function onLanguageChange(event, ui) {
 	    language = ui.item.value;
-	    $(document).trigger('filterChange', [language, shade, sortBy]);
+	    $(document).trigger('onLanguageChange', [language, shade, sortBy]);
 	}
 
 	function onSortByChange(event, ui) {
 	    sortBy = ui.item.value;
-	    $(document).trigger('filterChange', [language, shade, sortBy]);
+	    $(document).trigger('onSortByChange', [language, shade, sortBy]);
 	}
     };
 
@@ -195,12 +196,14 @@ var emacsThemesGallery = emacsThemesGallery || {};
 	function refreshThemes(language, shade, sortBy) {
 	    $themeCollection.hide();
 	    $themeCollection.filter('.' + shade + '.' + language).show();
-	    sortThemes(sortBy);
 	}
 
 	function bindEvents() {
-	    $(document).off('filterChange').on('filterChange', function(event, language, shade, sortBy) {
+	    $(document).off('onShadeChange onLanguageChange').on('onShadeChange onLanguageChange', function(event, language, shade, sortBy) {
 		refreshThemes(language, shade, sortBy);
+	    });
+	    $(document).off('onSortByChange').on('onSortByChange', function(event, language, shade, sortBy) {
+		sortThemes(sortBy);
 	    });
 	}
     };
