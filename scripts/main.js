@@ -4,82 +4,6 @@ var emacsThemesGallery = emacsThemesGallery || {};
 
     var themeProperties = emacsThemesGallery.themeProperties;
 
-    (function initialize() {
-	initializeThemeProperties();
-	initializeGallery();
-    })();
-
-    function initializeThemeProperties() {
-	themeProperties.rootFolder		= 'screenshots/';
-	themeProperties.darkFolder		= themeProperties.rootFolder + 'dark/';
-	themeProperties.lightFolder		= themeProperties.rootFolder + 'light/';
-	themeProperties.imgExtension	        =  '.png';
-
-	themeProperties.languages = [
-	    { name: 'C',
-	      extension: 'c'
-	    },
-	    { name: 'Java',
-	      extension: 'java'
-	    },
-	    { name: 'JavaScript',
-	      extension: 'js'
-	    },
-	    { name: 'HTML',
-	      extension: 'html'
-	    },
-	    { name: 'Elisp',
-	      extension: 'el'
-	    },
-	    { name: 'Org',
-	      extension: 'org'
-	    },
-	    { name: 'Dired',
-	      extension: 'dired'
-	    }
-	];
-    }
-
-    function initializeGallery() {
-
-	var documentReadyDeferred = $.Deferred();
-
-	$(document).ready(function() {
-	    documentReadyDeferred.resolve();
-	});
-
-	var melpaStatsDeferred = $.getJSON("http://query.yahooapis.com/v1/public/yql",
-					   {
-					       q     : "select * from json where url=\"http://melpa.milkbox.net/download_counts.json?fmt=JSON\"",
-					       format: "json"
-					   });
-
-	melpaStatsDeferred.done(function(jsonQuery) {
-	    var themeHits = jsonQuery.query.results.json;
-	    $.each(themeProperties.themes, function(i, theme) {
-		if (theme.melpaName === '') {
-		    theme.melpaHits = 1;
-		}
-		else {
-		    theme.melpaHits = parseInt(themeHits[theme.melpaName], 10);
-		    theme.melpHitsLocaleString = theme.melpaHits.toLocaleString();
-		}
-	    });
-	});
-	melpaStatsDeferred.fail(function() {
-	    $.each(themeProperties.themes, function(i, theme) {
-		theme.melpaHits = 1;
-		theme.melpHitsLocaleString = '~';
-	    });
-	});
-
-	$.when(documentReadyDeferred, melpaStatsDeferred).always(function() {
-	    $('#loading').hide();
-	    var filterView = new FilterView();
-	    var galleryView = new GalleryView(filterView.getSelectedFilter());
-	});
-    }
-
     var FilterView = function() {
 	var $themeColor;
 	var $languagesAndModes;
@@ -262,4 +186,81 @@ var emacsThemesGallery = emacsThemesGallery || {};
 	    return $div;
 	}
     };
+
+
+    (function initialize() {
+	initializeThemeProperties();
+	initializeGallery();
+    })();
+
+    function initializeThemeProperties() {
+	themeProperties.rootFolder		= 'screenshots/';
+	themeProperties.darkFolder		= themeProperties.rootFolder + 'dark/';
+	themeProperties.lightFolder		= themeProperties.rootFolder + 'light/';
+	themeProperties.imgExtension	        =  '.png';
+
+	themeProperties.languages = [
+	    { name: 'C',
+	      extension: 'c'
+	    },
+	    { name: 'Java',
+	      extension: 'java'
+	    },
+	    { name: 'JavaScript',
+	      extension: 'js'
+	    },
+	    { name: 'HTML',
+	      extension: 'html'
+	    },
+	    { name: 'Elisp',
+	      extension: 'el'
+	    },
+	    { name: 'Org',
+	      extension: 'org'
+	    },
+	    { name: 'Dired',
+	      extension: 'dired'
+	    }
+	];
+    }
+
+    function initializeGallery() {
+
+	var documentReadyDeferred = $.Deferred();
+
+	$(document).ready(function() {
+	    documentReadyDeferred.resolve();
+	});
+
+	var melpaStatsDeferred = $.getJSON("http://query.yahooapis.com/v1/public/yql",
+					   {
+					       q     : "select * from json where url=\"http://melpa.milkbox.net/download_counts.json?fmt=JSON\"",
+					       format: "json"
+					   });
+
+	melpaStatsDeferred.done(function(jsonQuery) {
+	    var themeHits = jsonQuery.query.results.json;
+	    $.each(themeProperties.themes, function(i, theme) {
+		if (theme.melpaName === '') {
+		    theme.melpaHits = 1;
+		}
+		else {
+		    theme.melpaHits = parseInt(themeHits[theme.melpaName], 10);
+		    theme.melpHitsLocaleString = theme.melpaHits.toLocaleString();
+		}
+	    });
+	});
+	melpaStatsDeferred.fail(function() {
+	    $.each(themeProperties.themes, function(i, theme) {
+		theme.melpaHits = 1;
+		theme.melpHitsLocaleString = '~';
+	    });
+	});
+
+	$.when(documentReadyDeferred, melpaStatsDeferred).always(function() {
+	    $('#loading').hide();
+	    var filterView = new FilterView();
+	    var galleryView = new GalleryView(filterView.getSelectedFilter());
+	});
+    }
 })(jQuery);
