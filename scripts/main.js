@@ -40,6 +40,7 @@ var emacsThemesGallery = emacsThemesGallery || {};
 	};
 
 	function onShadeChange() {
+	    $themeColor.buttonset('refresh');
 	    shade = ($(this).val() === 'Dark') ? 'dark' : 'light';
 	    $(document).trigger('onShadeChange', [language, shade, sortBy]);
 	}
