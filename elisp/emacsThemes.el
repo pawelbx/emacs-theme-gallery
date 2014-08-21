@@ -51,6 +51,7 @@
 		  (soothe t "https://github.com/emacsfodder/emacs-soothe-theme" "soothe-theme")
 		  (tango nil "native")
 		  (tango-dark t "native")
+		  (tangotango t "https://github.com/juba/color-theme-tangotango" "tangotango-theme")
 		  (tsdh-dark t "native")
 		  (tsdh-light nil "native")
 		  (wheatgrass t "native")

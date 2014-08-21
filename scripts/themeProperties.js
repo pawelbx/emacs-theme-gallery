@@ -51,6 +51,7 @@ emacsThemesGallery.themeProperties.themes = [
 { name: 'soothe', dark: true, location: 'https://github.com/emacsfodder/emacs-soothe-theme', melpaName: 'soothe-theme' },
 { name: 'tango', dark: false, location: 'native', melpaName: '' },
 { name: 'tango-dark', dark: true, location: 'native', melpaName: '' },
+{ name: 'tangotango', dark: true, location: 'https://github.com/juba/color-theme-tangotango', melpaName: 'tangotango-theme' },
 { name: 'tsdh-dark', dark: true, location: 'native', melpaName: '' },
 { name: 'tsdh-light', dark: false, location: 'native', melpaName: '' },
 { name: 'wheatgrass', dark: true, location: 'native', melpaName: '' },
