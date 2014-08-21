@@ -48,6 +48,7 @@ emacsThemesGallery.themeProperties.themes = [
 { name: 'sanityinc-tomorrow-night', dark: true, location: 'https://github.com/purcell/color-theme-sanityinc-tomorrow', melpaName: 'color-theme-sanityinc-tomorrow' },
 { name: 'solarized-dark', dark: true, location: 'https://github.com/bbatsov/solarized-emacs', melpaName: 'solarized-theme' },
 { name: 'solarized-light', dark: false, location: 'https://github.com/bbatsov/solarized-emacs', melpaName: 'solarized-theme' },
+{ name: 'soothe', dark: true, location: 'https://github.com/emacsfodder/emacs-soothe-theme', melpaName: 'soothe-theme' },
 { name: 'tango', dark: false, location: 'native', melpaName: '' },
 { name: 'tango-dark', dark: true, location: 'native', melpaName: '' },
 { name: 'tsdh-dark', dark: true, location: 'native', melpaName: '' },

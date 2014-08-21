@@ -48,6 +48,7 @@
 		  (sanityinc-tomorrow-night t "https://github.com/purcell/color-theme-sanityinc-tomorrow" "color-theme-sanityinc-tomorrow")
 		  (solarized-dark t "https://github.com/bbatsov/solarized-emacs" "solarized-theme")
 		  (solarized-light nil "https://github.com/bbatsov/solarized-emacs" "solarized-theme")
+		  (soothe t "https://github.com/emacsfodder/emacs-soothe-theme" "soothe-theme")
 		  (tango nil "native")
 		  (tango-dark t "native")
 		  (tsdh-dark t "native")
