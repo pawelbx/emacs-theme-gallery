@@ -73,5 +73,10 @@ img {
     left: 0;
  }
 
+#socialMedia iframe {
+    margin: 0.5rem;
+    display: block;
+}
+
 a:link { color:#0099FF; }
 a:visited { color:#BB88EE; }
