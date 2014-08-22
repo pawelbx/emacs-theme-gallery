@@ -52,6 +52,7 @@
 		  (tango nil "native")
 		  (tango-dark t "native")
 		  (tangotango t "https://github.com/juba/color-theme-tangotango" "tangotango-theme")
+		  (tango-plus nil "https://github.com/tmalsburg/tango-plus-theme" "tango-plus-theme")
 		  (tsdh-dark t "native")
 		  (tsdh-light nil "native")
 		  (wheatgrass t "native")
