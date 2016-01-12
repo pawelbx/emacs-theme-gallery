@@ -233,9 +233,9 @@ var emacsThemesGallery = emacsThemesGallery || {};
 	    documentReadyDeferred.resolve();
 	});
 
-	var melpaStatsDeferred = $.getJSON("http://query.yahooapis.com/v1/public/yql",
+	var melpaStatsDeferred = $.getJSON("//query.yahooapis.com/v1/public/yql",
 					   {
-					       q     : "select * from json where url=\"http://melpa.milkbox.net/download_counts.json?fmt=JSON\"",
+					       q     : "select * from json where url=\"//melpa.milkbox.net/download_counts.json?fmt=JSON\"",
 					       format: "json"
 					   });
 
