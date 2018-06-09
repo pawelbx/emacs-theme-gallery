@@ -41,6 +41,7 @@ emacsThemesGallery.themeProperties.themes = [
 { name: 'moe-dark', dark: true, location: 'https://github.com/kuanyui/moe-theme.el', melpaName: 'moe-theme' },
 { name: 'moe-light', dark: false, location: 'https://github.com/kuanyui/moe-theme.el', melpaName: 'moe-theme' },
 { name: 'monokai', dark: true, location: 'https://github.com/oneKelvinSmith/monokai-emacs', melpaName: 'monokai-theme' },
+{ name: 'nova', dark: true, location: 'https://github.com/muirmanders/emacs-nova-theme', melpaName: 'nova-theme' },
 { name: 'sanityinc-tomorrow-blue', dark: true, location: 'https://github.com/purcell/color-theme-sanityinc-tomorrow', melpaName: 'color-theme-sanityinc-tomorrow' },
 { name: 'sanityinc-tomorrow-bright', dark: true, location: 'https://github.com/purcell/color-theme-sanityinc-tomorrow', melpaName: 'color-theme-sanityinc-tomorrow' },
 { name: 'sanityinc-tomorrow-day', dark: false, location: 'https://github.com/purcell/color-theme-sanityinc-tomorrow', melpaName: 'color-theme-sanityinc-tomorrow' },
