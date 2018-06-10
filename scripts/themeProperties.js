@@ -50,6 +50,8 @@ emacsThemesGallery.themeProperties.themes = [
 { name: 'solarized-dark', dark: true, location: 'https://github.com/bbatsov/solarized-emacs', melpaName: 'solarized-theme' },
 { name: 'solarized-light', dark: false, location: 'https://github.com/bbatsov/solarized-emacs', melpaName: 'solarized-theme' },
 { name: 'soothe', dark: true, location: 'https://github.com/emacsfodder/emacs-soothe-theme', melpaName: 'soothe-theme' },
+{ name: 'spacemacs-dark', dark: true, location: 'https://github.com/nashamri/spacemacs-theme', melpaName: '' },
+{ name: 'spacemacs-light', dark: true, location: 'https://github.com/nashamri/spacemacs-theme', melpaName: '' },
 { name: 'tango', dark: false, location: 'native', melpaName: '' },
 { name: 'tango-dark', dark: true, location: 'native', melpaName: '' },
 { name: 'tangotango', dark: true, location: 'https://github.com/juba/color-theme-tangotango', melpaName: 'tangotango-theme' },
