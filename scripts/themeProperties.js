@@ -273,7 +273,7 @@ emacsThemesGallery.themeProperties.themes = [
   },
   {
     name: "spacemacs-light",
-    dark: true,
+    dark: false,
     location: "https://github.com/nashamri/spacemacs-theme",
     melpaName: "spacemacs-theme"
   },

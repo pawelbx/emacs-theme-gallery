@@ -51,7 +51,7 @@
 		  (solarized-light nil "https://github.com/bbatsov/solarized-emacs" "solarized-theme")
 		  (soothe t "https://github.com/emacsfodder/emacs-soothe-theme" "soothe-theme")
       (spacemacs-dark t "https://github.com/nashamri/spacemacs-theme", "spacemacs-theme")
-      (spacemacs-light t "https://github.com/nashamri/spacemacs-theme", "spacemacs-theme")
+      (spacemacs-light nil "https://github.com/nashamri/spacemacs-theme", "spacemacs-theme")
 		  (tango nil "native")
 		  (tango-dark t "native")
 		  (tangotango t "https://github.com/juba/color-theme-tangotango" "tangotango-theme")
