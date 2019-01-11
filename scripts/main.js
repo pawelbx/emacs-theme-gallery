@@ -260,16 +260,10 @@ var emacsThemesGallery = emacsThemesGallery || {};
     });
 
     var melpaStatsDeferred = $.getJSON(
-      "https://query.yahooapis.com/v1/public/yql",
-      {
-        q:
-          'select * from json where url="http://melpa.milkbox.net/download_counts.json?fmt=JSON"',
-        format: "json"
-      }
+      "https://jsonp.afeld.me/?callback=?&url=https://melpa.milkbox.net/download_counts.json"
     );
 
-    melpaStatsDeferred.done(function(jsonQuery) {
-      var themeHits = jsonQuery.query.results.json;
+    melpaStatsDeferred.done(function(themeHits) {
       $.each(themeProperties.themes, function(i, theme) {
         if (theme.melpaName === "") {
           theme.melpaHits = 1;
