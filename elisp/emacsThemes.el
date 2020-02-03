@@ -42,6 +42,7 @@
 		  (moe-light nil "https://github.com/kuanyui/moe-theme.el" "moe-theme")
 		  (monokai t "https://github.com/oneKelvinSmith/monokai-emacs" "monokai-theme")
       (nova t "https://github.com/muirmanders/emacs-nova-theme" "nova-theme")
+		  (qtcreator nil "https://github.com/LesleyLai/emacs-qtcreator-theme" "qtcreator-theme")
 		  (sanityinc-tomorrow-blue t "https://github.com/purcell/color-theme-sanityinc-tomorrow" "color-theme-sanityinc-tomorrow")
 		  (sanityinc-tomorrow-bright t "https://github.com/purcell/color-theme-sanityinc-tomorrow" "color-theme-sanityinc-tomorrow")
 		  (sanityinc-tomorrow-day nil "https://github.com/purcell/color-theme-sanityinc-tomorrow"  "color-theme-sanityinc-tomorrow")
