@@ -34,6 +34,8 @@
 		  (hemisu-dark t "https://github.com/andrzejsliwa/hemisu-theme" "hemisu-theme")
 		  (hemisu-light nil "https://github.com/andrzejsliwa/hemisu-theme" "hemisu-theme")
 		  (heroku t "https://github.com/jonathanchu/heroku-theme" "heroku-theme")
+		  (humanoid-dark t "https://github.com/humanoid-colors/emacs-humanoid-themes" "humanoid-themes")
+		  (humanoid-light nil "https://github.com/humanoid-colors/emacs-humanoid-themes" "humanoid-themes")
 		  (leuven nil "https://github.com/fniessen/emacs-leuven-theme" "leuven-theme")
 		  (light-blue nil "native")
 		  (manoj-dark t "native")
