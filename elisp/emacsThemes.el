@@ -52,6 +52,8 @@
 		  (soothe t "https://github.com/emacsfodder/emacs-soothe-theme" "soothe-theme")
       (spacemacs-dark t "https://github.com/nashamri/spacemacs-theme" "spacemacs-theme")
       (spacemacs-light nil "https://github.com/nashamri/spacemacs-theme" "spacemacs-theme")
+	  	  (stimmung-themes-light nil "https://github.com/motform/stimmung-themes" "stimmung-themes")
+	      (stimmung-themes-dark t "https://github.com/motform/stimmung-themes" "stimmung-themes")
 		  (tango nil "native")
 		  (tango-dark t "native")
 		  (tangotango t "https://github.com/juba/color-theme-tangotango" "tangotango-theme")
